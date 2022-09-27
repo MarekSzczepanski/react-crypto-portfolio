@@ -1,3 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.add-currency {
+    display: flex;
+}
+.input-container {
+    display: flex;
+    flex-direction: column;
+    width: 15vw;
+    margin: 20px;
+}
+#currency-name {
+    position: absolute;
+    width: 15vw;
+}
 .proposal:hover {
     border: solid 1px #444;
     cursor: pointer;
