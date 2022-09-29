@@ -48,7 +48,7 @@ function CurrencyNameInput() {
 
     return (
         <div className='autocomplete'>
-            <input id='currency-name' type='text' onChange={handleCurrencyNameChange} value={currencyName ? currencyName : ''} />
+            <input id='currency-name' type='text' onChange={handleCurrencyNameChange} value={currencyName ? currencyName : ''}/>
             {namesProposals ? renderCurrencyNameProposals() : null}
           </div>
     )
