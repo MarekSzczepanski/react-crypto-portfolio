@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 
-function CurrencyNameInput() {
+const CurrencyNameInput = () => {
     const [allNames, setAllNames] = useState(null);
     const [namesProposals, setNamesProposals] = useState(null);
     const [currencyName, setCurrencyName] = useState(null);
@@ -50,7 +50,7 @@ function CurrencyNameInput() {
         <div className='autocomplete'>
             <input id='currency-name' type='text' onChange={handleCurrencyNameChange} value={currencyName ? currencyName : ''}/>
             {namesProposals ? renderCurrencyNameProposals() : null}
-          </div>
+        </div>
     )
 }
 

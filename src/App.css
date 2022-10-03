@@ -20,3 +20,6 @@
     border: solid 1px #444;
     cursor: pointer;
 }
+.display-none {
+    display: none;
+}
