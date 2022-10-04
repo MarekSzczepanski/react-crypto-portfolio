@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import {router} from './routes/auth.js';
+import {authRouter} from './routes/auth.js';
+import {transactionsRouter} from './routes/transactions.js';
 import {db} from './db.js';
 
 const port = '5000';
@@ -15,7 +16,8 @@ db.connect((err) => {
     console.log(('MYSQL connected'));
 });
 
-app.use('/auth', router)
+app.use('/auth', authRouter);
+app.use('/transactions', transactionsRouter);
 
 app.listen(5000, () => {
     console.log(`server started on port ${port}`);

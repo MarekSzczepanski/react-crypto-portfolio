@@ -23,3 +23,10 @@
 .display-none {
     display: none;
 }
+.add-transaction {
+    height: 50px;
+    margin-top: 20px;
+}
+.proposal:first-of-type {
+    margin-top: 20px;
+}
