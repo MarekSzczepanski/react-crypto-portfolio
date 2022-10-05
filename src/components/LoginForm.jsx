@@ -25,20 +25,18 @@ const LoginForm = ({setIsLoggedIn, setUsername, setUserId}) => {
     }
 
     return (
-        <main>
-            <form onSubmit={LogIn}>
-                <h2>Log in</h2>
-                <div className='input-container'>
-                    <label htmlFor='login-email'>Email:</label>
-                    <input id='login-email' type='email'/>
-                </div>
-                <div className='input-container'>
-                    <label htmlFor='login-password'>Password:</label>
-                    <input id='login-password' type='password'/>
-                </div>
-                <button type='submit'>Log in</button>
-            </form>
-        </main>
+        <form onSubmit={LogIn}>
+            <h2>Log in</h2>
+            <div className='input-container'>
+                <label htmlFor='login-email'>Email:</label>
+                <input id='login-email' type='email'/>
+            </div>
+            <div className='input-container'>
+                <label htmlFor='login-password'>Password:</label>
+                <input id='login-password' type='password'/>
+            </div>
+            <button type='submit'>Log in</button>
+        </form>
     )
 }
 

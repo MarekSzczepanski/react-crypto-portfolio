@@ -20,10 +20,10 @@ function App() {
           <TransactionsContainer userId={userId} />
         </main>
       :
-      <>
+      <main>
         <LoginForm setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} setUserId={setUserId}/>
         <RegisterForm />
-      </>
+      </main>
       }
     </div>
   );

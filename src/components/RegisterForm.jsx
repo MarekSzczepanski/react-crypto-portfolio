@@ -32,7 +32,7 @@ const RegisterForm = () => {
     }
 
     return (
-        <main>
+        <>
             <form onSubmit={registerUser}>
                 <h2>Register</h2>
                 <div className='input-container'>
@@ -54,7 +54,7 @@ const RegisterForm = () => {
                 <button type='submit'>Register</button>
             </form>
             <div className={isHiddenInfo ? 'display-none' : null}>User Registered!</div>
-        </main>
+        </>
     )
 }
 
