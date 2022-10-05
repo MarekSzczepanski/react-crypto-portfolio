@@ -1,3 +1,12 @@
+import {db} from '../db.js';
+
 export const add = (req, res) => {
-  console.log(1, req.body)
+  const {currencyName, ammount, price, userId} = req.body;
+
+  db.query('INSERT INTO transactions SET ?', {user_id: userId, name: currencyName, ammount, price}, (err, results) => {
+    if (err) return console.log(err)
+      console.log('Transaction added');
+      res.send({added: true});
+      res.end();
+  });
 }

@@ -71,7 +71,8 @@ const AddTransactionForm = ({userId}) => {
             body: JSON.stringify({
                 currencyName,
                 ammount,
-                price
+                price,
+                userId
             })
         })
         .then((res) => res.json()
