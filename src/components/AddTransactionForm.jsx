@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {useEffect} from 'react';
 
-const AddTransactionForm = () => {
+const AddTransactionForm = ({userId}) => {
     const [allNames, setAllNames] = useState(null);
     const [namesProposals, setNamesProposals] = useState(null);
     const [currencyName, setCurrencyName] = useState('');

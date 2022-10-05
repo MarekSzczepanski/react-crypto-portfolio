@@ -1,4 +1,4 @@
-const LoginForm = ({setIsLoggedIn, setUsername}) => {
+const LoginForm = ({setIsLoggedIn, setUsername, setUserId}) => {
     const LogIn = (e) => {
         e.preventDefault();
         const email = document.getElementById('login-email').value;
@@ -19,6 +19,7 @@ const LoginForm = ({setIsLoggedIn, setUsername}) => {
             if (res.loggedIn) {
                 setIsLoggedIn(true);
                 setUsername(res.username);
+                setUserId(res.userId);
             } 
         }))
     }

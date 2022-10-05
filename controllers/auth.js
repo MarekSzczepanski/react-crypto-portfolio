@@ -33,7 +33,7 @@ export const login = async (req, res) => {
             if (err) return console.log(err);
             if (!results || !await bcrypt.compare(password, dbPassword)) return res.status(401);
 
-            res.send({loggedIn: true, username: results[0].name});
+            res.send({loggedIn: true, username: results[0].name, userId: results[0].id});
             res.end();
         })
     } catch (err) {
