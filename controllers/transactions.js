@@ -10,3 +10,11 @@ export const add = (req, res) => {
       res.end();
   });
 }
+
+export const fetch = (req, res) => {
+  db.query(`SELECT * FROM transactions WHERE user_id = ${req.query.id}`, async (err, results) => {
+    if (err) return console.log(err)
+    res.send({transactions: results});
+    res.end();
+  });
+}
