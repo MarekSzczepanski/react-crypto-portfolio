@@ -30,3 +30,9 @@
 .proposal:first-of-type {
     margin-top: 20px;
 }
+.transaction, .transaction-column-tittles {
+    display: flex; 
+}
+.transaction-field, .transaction-column-tittle {
+    width: 25vw;
+}
