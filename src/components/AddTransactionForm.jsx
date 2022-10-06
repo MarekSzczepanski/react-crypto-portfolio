@@ -7,6 +7,7 @@ const AddTransactionForm = ({userId}) => {
     const [currencyName, setCurrencyName] = useState('');
     const [ammount, setAmmount] = useState('');
     const [price, setPrice] = useState('');
+    const [currencyId, setCurrencyId] = useState('');
 
     useEffect(() => {
         getCurrenciesNames();
@@ -22,8 +23,14 @@ const AddTransactionForm = ({userId}) => {
         const price = document.getElementById('currency-price');
 
         if (nameOrProposal) {
+            const proposalId = e.target.dataset.currency_id;
+            if (proposalId) {
+                setCurrencyId(proposalId);
+                return setCurrencyName(e.target.textContent);
+            }
+            setCurrencyId(null);
             checkCurrencyNameProposals(e);
-            return setCurrencyName(e.target.value || e.target.textContent);
+            return setCurrencyName(e.target.value);
         } 
         if (e.target === ammount) return setAmmount(ammount.value);
         if (e.target === price) return setPrice(price.value);
@@ -54,7 +61,7 @@ const AddTransactionForm = ({userId}) => {
         for (let i=0; i<namesProposals.length; i++) {
           if (i > 10) break;
           if (currencyName !== namesProposals[i].name) {
-            proposals.push(<div className='proposal' key={i} onClick={(e) => handleTransactionDataChange(e)}>{namesProposals[i].name}</div>);
+            proposals.push(<div className='proposal' key={i} data-currency_id={namesProposals[i].id} onClick={(e) => handleTransactionDataChange(e)}>{namesProposals[i].name}</div>);
           } 
         }
         return proposals;
@@ -72,7 +79,8 @@ const AddTransactionForm = ({userId}) => {
                 currencyName,
                 ammount,
                 price,
-                userId
+                userId,
+                currencyId
             })
         })
         .then((res) => res.json()
@@ -97,7 +105,7 @@ const AddTransactionForm = ({userId}) => {
                 <input id='currency-ammount' type='text' value={ammount} onChange={(e) => handleTransactionDataChange(e)}/>
             </div>
             <div className='input-container'>
-                <label htmlFor='currency-price'>Cryptocurrency price</label>
+                <label htmlFor='currency-price'>Cryptocurrency price (PLN)</label>
                 <input id='currency-price' type='text' value={price} onChange={(e) => handleTransactionDataChange(e)}/>
             </div>
             <button className='add-transaction' type='submit'>Add transaction</button>

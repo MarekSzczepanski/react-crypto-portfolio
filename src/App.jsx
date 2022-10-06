@@ -9,14 +9,14 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState(null);
   const [userId, setUserId] = useState(null);
-
+  
   return (
     <div className="App">
       <h1>Simple Crypto Portfolio</h1>
       {isLoggedIn ?
         <main>
           <h2>Hello {username}</h2> 
-          <AddTransactionForm userId={userId}/>
+          <AddTransactionForm userId={userId} />
           <TransactionsContainer userId={userId} />
         </main>
       :
