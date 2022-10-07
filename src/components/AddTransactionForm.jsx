@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {useEffect} from 'react';
 
-const AddTransactionForm = ({userId}) => {
+const AddTransactionForm = ({userId, setTransactionAdded}) => {
     const [allNames, setAllNames] = useState(null);
     const [namesProposals, setNamesProposals] = useState(null);
     const [currencyName, setCurrencyName] = useState('');
@@ -37,11 +37,7 @@ const AddTransactionForm = ({userId}) => {
     };
 
     const getCurrenciesNames = () => {
-        fetch("https://api.coingecko.com/api/v3/coins/list")
-        .then((res) => res.json()
-        .then((res) => {
-          setAllNames(res);
-        }));
+        fetch("https://api.coingecko.com/api/v3/coins/list").then(res => res.json().then(res => setAllNames(res)));
     };
 
     const checkCurrencyNameProposals = (e) => {
@@ -82,13 +78,7 @@ const AddTransactionForm = ({userId}) => {
                 userId,
                 currencyId
             })
-        })
-        .then((res) => res.json()
-        .then((res) => {
-            if (res) {
-                
-            } 
-        }))
+        }).then(res => res.json().then(res => { if (res) setTransactionAdded(true) }));
     };
 
     return (
