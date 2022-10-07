@@ -4,6 +4,7 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
     const [transactions, setTransactions] = useState(null);
     const [currentPricesFetched, setCurrentPricesFetched] = useState(null);
     const [transactionsWithCurrentPrices, setTransactionsWithCurrentPrices] = useState(null);
+    const [totalProfit, setTotalProfit] = useState(null);
 
     useEffect(() => { getTransactions() }, []);
     useEffect(() => { 
@@ -12,6 +13,7 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
     }, [transactions]);
     useEffect(() => { if (currentPricesFetched) setCurrentPricesForTransactions(currentPricesFetched) }, [currentPricesFetched]);
     useEffect(() => { if (transactionAdded) setTransactions(null)}, [transactionAdded]);
+    useEffect(() => { if (transactionsWithCurrentPrices) countTotalProfit()}, [transactionsWithCurrentPrices])
 
     const getTransactions = () => {
         if (transactions) return;
@@ -45,6 +47,17 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
         setTransactionsWithCurrentPrices(updatedTransactions);
     }
 
+    const countTotalProfit = () => {
+        const profits = document.querySelectorAll('[data-profit]');
+        let total = 0;
+        
+        for (let i=0; i<profits.length; i++) {
+            if (!isNaN(Number(profits[i].textContent))) total += Number(profits[i].textContent);
+        }
+
+        setTotalProfit(total.toFixed(2));
+    }
+
     const renderTransactions = () => {
         if (!transactions) return;
         
@@ -57,9 +70,9 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
             transaction_divs.push(
                 <div className='transaction' key={i} data-currency_id={transaction.currency_id}>
                     <div className='transaction-field'>{transaction.name}</div>
-                    <div className='transaction-field' data-currency_ammount={''}>{ammount}</div>
-                    <div className='transaction-field' data-currency_price={''}>{boughtFor}</div>
-                    <div className='transaction-field'>{ammount * transaction.currentPrice - ammount * boughtFor}</div>
+                    <div className='transaction-field' data-currency_ammount=''>{ammount}</div>
+                    <div className='transaction-field' data-currency_price=''>{boughtFor}</div>
+                    <div className='transaction-field' data-profit=''>{ammount * transaction.currentPrice - ammount * boughtFor}</div>
                 </div>
             );
         }
@@ -75,6 +88,7 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
                 <div className='transaction-column-tittle'>Profit (PLN)</div>
             </div>
             {transactionsWithCurrentPrices ? renderTransactions() : null}
+            <div className='total-profit'>{totalProfit}</div>
         </div>
     )
 }

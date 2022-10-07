@@ -36,3 +36,7 @@
 .transaction-field, .transaction-column-tittle {
     width: 25vw;
 }
+.total-profit {
+    margin: 10px 0 0 75vw;
+    font-weight: 700;
+}
