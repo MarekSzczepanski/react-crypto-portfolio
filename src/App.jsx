@@ -21,7 +21,7 @@ function App() {
           <TransactionsContainer userId={userId} transactionAdded={transactionAdded} setTransactionAdded={setTransactionAdded} / >
         </main>
       :
-      <main>
+      <main className='sign-forms-container'>
         <LoginForm setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} setUserId={setUserId}/>
         <RegisterForm />
       </main>

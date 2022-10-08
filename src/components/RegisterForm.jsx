@@ -1,4 +1,8 @@
 import { useState } from "react";
+import Avatar from '@mui/material/Avatar';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const RegisterForm = () => {
     const [isHiddenInfo, setIsHiddenInfo] = useState(true);
@@ -32,29 +36,20 @@ const RegisterForm = () => {
     }
 
     return (
-        <>
-            <form onSubmit={registerUser}>
-                <h2>Register</h2>
-                <div className='input-container'>
-                    <label htmlFor='register-name'>Username:</label>
-                    <input id='register-name' type='text'/>
-                </div>
-                <div className='input-container'>
-                    <label htmlFor='register-email'>Email:</label>
-                    <input id='register-email' type='email'/>
-                </div>
-                <div className='input-container'>
-                    <label htmlFor='register-password'>Password:</label>
-                    <input id='register-password' type='password'/>
-                </div>
-                <div className='input-container'>
-                    <label htmlFor='register-password-confirm'>Confirm password:</label>
-                    <input id='register-password-confirm' type='password'/>
-                </div>
-                <button type='submit'>Register</button>
-            </form>
-            <div className={isHiddenInfo ? 'display-none' : null}>User Registered!</div>
-        </>
+    <>
+        <form className='sign-form' onSubmit={registerUser}>
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <LockOutlinedIcon />
+            </Avatar>
+            <h2>Register</h2>
+            <TextField className='sign-form-input-container' id="register-name" name="username" required label="Username" type='text'/>
+            <TextField className='sign-form-input-container' id="register-email" name="email" required label="Email" type='email' />
+            <TextField className='sign-form-input-container' id="register-password" name="register-password" required label="Password" type='password' />
+            <TextField className='sign-form-input-container' id="register-password-confirm" name="register-password-confirm" required label="Confirm password" type='password'/>
+            <Button className='sign-form-button' type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>Register</Button>
+        </form>
+        <div className={isHiddenInfo ? 'display-none' : null}>User Registered!</div>
+    </>
     )
 }
 

@@ -1,3 +1,8 @@
+import Avatar from '@mui/material/Avatar';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
 const LoginForm = ({setIsLoggedIn, setUsername, setUserId}) => {
     const LogIn = (e) => {
         e.preventDefault();
@@ -25,17 +30,14 @@ const LoginForm = ({setIsLoggedIn, setUsername, setUserId}) => {
     }
 
     return (
-        <form onSubmit={LogIn}>
+        <form className='sign-form' onSubmit={LogIn}>
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <LockOpenIcon />
+            </Avatar>
             <h2>Log in</h2>
-            <div className='input-container'>
-                <label htmlFor='login-email'>Email:</label>
-                <input id='login-email' type='email'/>
-            </div>
-            <div className='input-container'>
-                <label htmlFor='login-password'>Password:</label>
-                <input id='login-password' type='password'/>
-            </div>
-            <button type='submit'>Log in</button>
+            <TextField className='sign-form-input-container' id='login-email' name="email" required label="Email" type='email' />
+            <TextField className='sign-form-input-container' id='login-password' name="login-password" required  label="Password" type='password' />
+            <Button className='sign-form-button' type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>Log in</Button>
         </form>
     )
 }
