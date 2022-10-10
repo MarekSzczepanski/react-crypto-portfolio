@@ -1,3 +1,10 @@
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 import {useState, useEffect} from 'react';
 
 const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) => {
@@ -13,7 +20,26 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
     }, [transactions]);
     useEffect(() => { if (currentPricesFetched) setCurrentPricesForTransactions(currentPricesFetched) }, [currentPricesFetched]);
     useEffect(() => { if (transactionAdded) setTransactions(null)}, [transactionAdded]);
-    useEffect(() => { if (transactionsWithCurrentPrices) countTotalProfit()}, [transactionsWithCurrentPrices])
+    useEffect(() => { if (transactionsWithCurrentPrices) countTotalProfit()}, [transactionsWithCurrentPrices]);
+
+    const StyledTableCell = styled(TableCell)(({ theme }) => ({
+        [`&.${tableCellClasses.head}`]: {
+            backgroundColor: theme.palette.common.black,
+            color: theme.palette.common.white,
+        },
+        [`&.${tableCellClasses.body}`]: {
+            fontSize: 14,
+        },
+    }));
+      
+    const StyledTableRow = styled(TableRow)(({ theme }) => ({
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.action.hover,
+        },
+        '&:last-child td, &:last-child th': {
+            border: 0,
+        },
+    }));
 
     const getTransactions = () => {
         if (transactions) return;
@@ -23,7 +49,7 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
             method: 'GET',
             headers: { 'Content-type': 'application/json'}
         }).then(res => res.json().then(res => setTransactions(res.transactions)));
-    }
+    };
 
     const getCurrentPrices = () => {
         const currenciesIds = transactions.map(transaction => transaction.currency_id);
@@ -31,7 +57,7 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
             method: 'GET',
             headers: { 'Content-type': 'application/json'}
         }).then(res => res.json().then((res) => setCurrentPricesFetched(res)));
-    }
+    };
 
     const setCurrentPricesForTransactions = (prices) => {
         const currencyNames = Object.keys(prices);
@@ -45,7 +71,7 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
         }
 
         setTransactionsWithCurrentPrices(updatedTransactions);
-    }
+    };
 
     const countTotalProfit = () => {
         const profits = document.querySelectorAll('[data-profit]');
@@ -56,7 +82,7 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
         }
 
         setTotalProfit(total.toFixed(2));
-    }
+    };
 
     const renderTransactions = () => {
         if (!transactions) return;
@@ -66,31 +92,40 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
             const transaction = transactions[i];
             const ammount = Number(transaction.ammount);
             const boughtFor = Number(transaction.price);
+            const calcProfit = ammount * transaction.currentPrice - ammount * boughtFor;
 
             transaction_divs.push(
-                <div className='transaction' key={i} data-currency_id={transaction.currency_id}>
-                    <div className='transaction-field'>{transaction.name}</div>
-                    <div className='transaction-field' data-currency_ammount=''>{ammount}</div>
-                    <div className='transaction-field' data-currency_price=''>{boughtFor}</div>
-                    <div className='transaction-field' data-profit=''>{ammount * transaction.currentPrice - ammount * boughtFor}</div>
-                </div>
+                <StyledTableRow className='transaction' key={i} data-currency_id={transaction.currency_id}>
+                    <StyledTableCell className='transaction-field' component="th" scope="row">{transaction.name}</StyledTableCell>
+                    <StyledTableCell className='transaction-field' data-currency_ammount='' component="th" scope="row">{ammount}</StyledTableCell>
+                    <StyledTableCell className='transaction-field' data-currency_price='' component="th" scope="row">{boughtFor}</StyledTableCell>
+                    <StyledTableCell className={`transaction-field profit ${calcProfit > 0 ? 'profit-plus' : 'profit-minus'}`} data-profit='' component="th" scope="row" align="right">{isNaN(calcProfit) ? '?' : calcProfit.toFixed(2)}</StyledTableCell>
+                </StyledTableRow>
             );
         }
         return transaction_divs;
-    }
+    };
 
     return (
-        <div className='transactions-container'>
-            <div className='transaction-column-tittles'>
-                <div className='transaction-column-tittle'>Currency Name</div>
-                <div className='transaction-column-tittle'>Currency Ammount</div>
-                <div className='transaction-column-tittle'>Currency Price</div>
-                <div className='transaction-column-tittle'>Profit (PLN)</div>
-            </div>
-            {transactionsWithCurrentPrices ? renderTransactions() : null}
-            <div className='total-profit'>{totalProfit}</div>
-        </div>
-    )
+        <>
+        <Table aria-label="customized table">
+            <TableHead>
+                <TableRow>
+                    <StyledTableCell className='transaction-column-tittle' align="left">Currency Name</StyledTableCell>
+                    <StyledTableCell className='transaction-column-tittle' align="left">Currency Ammount</StyledTableCell>
+                    <StyledTableCell className='transaction-column-tittle' align="left">Currency Price</StyledTableCell>
+                    <StyledTableCell className='transaction-column-tittle' align="right">Profit (PLN)</StyledTableCell>
+                 </TableRow>
+            </TableHead>
+            <TableBody>
+                {transactionsWithCurrentPrices ? renderTransactions() : null}
+                <tr className='total-profit-row'>
+                    <StyledTableCell className={`total-profit ${totalProfit > 0 ? 'profit-plus' : 'profit-minus'}`} component="th" colspan="4" align="right">{totalProfit}</StyledTableCell>
+                </tr>
+            </TableBody>
+        </Table>
+        </>
+    );
 }
 
 export default TransactionsContainer;
