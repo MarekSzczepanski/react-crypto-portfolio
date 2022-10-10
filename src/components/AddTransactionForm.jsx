@@ -86,10 +86,10 @@ const AddTransactionForm = ({userId, setTransactionAdded}) => {
                 </div>
             </div>
             <div className='input-container'>
-                <TextField id='currency-ammount' label='Ammount' variant='standard' type='text' value={ammount} onChange={(e) => handleTransactionDataChange(e)}/>
+                <TextField id='currency-ammount' label='Ammount' variant='standard' type='text' value={ammount} autoComplete="off" onChange={(e) => handleTransactionDataChange(e)}/>
             </div>
             <div className='input-container'>
-                <TextField id='currency-price' label='Price' variant='standard' type='text' value={price} onChange={(e) => handleTransactionDataChange(e)}/>
+                <TextField id='currency-price' label='Price' variant='standard' type='text' value={price} autoComplete="off" onChange={(e) => handleTransactionDataChange(e)}/>
             </div>
             <Button className='add-transaction' variant='contained' type='submit'>Add transaction</Button>
         </form>
