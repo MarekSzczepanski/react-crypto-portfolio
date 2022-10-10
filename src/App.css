@@ -37,7 +37,7 @@ h1, h2 {
     border-color: #444;
     cursor: pointer;
 }
-div.user-registered {
+div.register-message {
     position: absolute;
     top: 50vh;
     left: 50vw;
@@ -45,7 +45,7 @@ div.user-registered {
     opacity: 0;
     transition: opacity 2s;
 }
-div.show-user-registered {
+div.show-register-message {
     opacity: 1;
 }
 button.add-transaction {

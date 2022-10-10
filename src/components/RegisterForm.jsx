@@ -1,19 +1,17 @@
-import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Alert from '@mui/material/Alert';
 
-const RegisterForm = () => {
-    const [isHiddenInfo, setIsHiddenInfo] = useState(true);
-
+const RegisterForm = ({manageMessage}) => {
     const registerUser = (e) => {
         e.preventDefault();
         const name = document.getElementById('register-name').value;
         const email = document.getElementById('register-email').value;
         const password = document.getElementById('register-password').value;
         const confirmPassword = document.getElementById('register-password-confirm').value;
+
+        if (password !== confirmPassword) return manageMessage('error', 'Passwords don\'t match!') ;
     
         fetch('http://localhost:5000/auth/register' , {
             method: 'POST',
@@ -29,10 +27,9 @@ const RegisterForm = () => {
         })
         .then((res) => res.json()
         .then((res) => {
-            if (res.registered) {
-                setIsHiddenInfo(false);
-                setTimeout(() => { setIsHiddenInfo(true) }, 2000);
-            }
+            if (res.registered) return manageMessage('success', 'User Registered!') ;
+            if (res.error === 'error') return manageMessage('error', 'Something went wrong...') ;
+            if (res.error === 'email') return manageMessage('error', 'This email address has been used');
         }))
     }
 
@@ -49,7 +46,6 @@ const RegisterForm = () => {
             <TextField className='sign-form-input-container' id='register-password-confirm' name='register-password-confirm' required label='Confirm password' type='password'/>
             <Button className='sign-form-button' type='submit' variant='contained' sx={{ mt: 3, mb: 2 }}>Register</Button>
         </form>
-        <Alert className={`user-registered ${isHiddenInfo ? null : 'show-user-registered'}`} severity='success'>User Registered!</Alert>
     </>
     )
 }
