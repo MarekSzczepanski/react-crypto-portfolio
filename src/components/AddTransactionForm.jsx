@@ -81,7 +81,7 @@ const AddTransactionForm = ({userId, setTransactionAdded}) => {
         <form className='add-currency' onSubmit={addTransaction}>
             <div className='input-container'>
                 <div className='autocomplete'>
-                    <TextField id='currency-name' label='Crypto name' variant='standard' type='text' value={currencyName} onChange={(e) => handleTransactionDataChange(e)}/>
+                    <TextField id='currency-name' label='Crypto name' variant='standard' type='text' value={currencyName} autoComplete="off" onChange={(e) => handleTransactionDataChange(e)}/>
                     {namesProposals ? renderCurrencyNameProposals() : null}
                 </div>
             </div>
