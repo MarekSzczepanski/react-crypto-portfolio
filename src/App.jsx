@@ -12,11 +12,11 @@ function App() {
   const [transactionAdded, setTransactionAdded] = useState(false);
 
   return (
-    <div className="App">
+    <div className='App'>
       <h1>Simple Crypto Portfolio</h1>
       {isLoggedIn ?
         <main className='wrap'>
-          <h2>Hello {username}</h2> 
+          <h2 className='hello'>Hello {username}!</h2> 
           <AddTransactionForm userId={userId} setTransactionAdded={setTransactionAdded} />
           <TransactionsContainer userId={userId} transactionAdded={transactionAdded} setTransactionAdded={setTransactionAdded} / >
         </main>

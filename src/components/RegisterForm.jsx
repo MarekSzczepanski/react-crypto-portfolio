@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import TextField from '@mui/material/TextField';
@@ -15,7 +15,7 @@ const RegisterForm = () => {
         const confirmPassword = document.getElementById('register-password-confirm').value;
     
         fetch('http://localhost:5000/auth/register' , {
-            method: "POST",
+            method: 'POST',
             headers: {
                 'Content-type': 'application/json'
             },
@@ -42,11 +42,11 @@ const RegisterForm = () => {
                 <LockOutlinedIcon />
             </Avatar>
             <h2>Register</h2>
-            <TextField className='sign-form-input-container' id="register-name" name="username" required label="Username" type='text'/>
-            <TextField className='sign-form-input-container' id="register-email" name="email" required label="Email" type='email' />
-            <TextField className='sign-form-input-container' id="register-password" name="register-password" required label="Password" type='password' />
-            <TextField className='sign-form-input-container' id="register-password-confirm" name="register-password-confirm" required label="Confirm password" type='password'/>
-            <Button className='sign-form-button' type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>Register</Button>
+            <TextField className='sign-form-input-container' id='register-name' name='username' required label='Username' type='text'/>
+            <TextField className='sign-form-input-container' id='register-email' name='email' required label='Email' type='email' />
+            <TextField className='sign-form-input-container' id='register-password' name='register-password' required label='Password' type='password' />
+            <TextField className='sign-form-input-container' id='register-password-confirm' name='register-password-confirm' required label='Confirm password' type='password'/>
+            <Button className='sign-form-button' type='submit' variant='contained' sx={{ mt: 3, mb: 2 }}>Register</Button>
         </form>
         <div className={isHiddenInfo ? 'display-none' : null}>User Registered!</div>
     </>

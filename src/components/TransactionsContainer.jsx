@@ -96,10 +96,10 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
 
             transaction_divs.push(
                 <StyledTableRow className='transaction' key={i} data-currency_id={transaction.currency_id}>
-                    <StyledTableCell className='transaction-field' component="th" scope="row">{transaction.name}</StyledTableCell>
-                    <StyledTableCell className='transaction-field' data-currency_ammount='' component="th" scope="row">{ammount}</StyledTableCell>
-                    <StyledTableCell className='transaction-field' data-currency_price='' component="th" scope="row">{boughtFor}</StyledTableCell>
-                    <StyledTableCell className={`transaction-field profit ${calcProfit > 0 ? 'profit-plus' : 'profit-minus'}`} data-profit='' component="th" scope="row" align="right">{isNaN(calcProfit) ? '?' : calcProfit.toFixed(2)}</StyledTableCell>
+                    <StyledTableCell className='transaction-field' component='th' scope='row'>{transaction.name}</StyledTableCell>
+                    <StyledTableCell className='transaction-field' data-currency_ammount='' component='th' scope='row'>{ammount}</StyledTableCell>
+                    <StyledTableCell className='transaction-field' data-currency_price='' component='th' scope='row'>{boughtFor}</StyledTableCell>
+                    <StyledTableCell className={`transaction-field profit ${calcProfit > 0 ? 'profit-plus' : 'profit-minus'}`} data-profit='' component='th' scope='row' align='right'>{isNaN(calcProfit) ? '?' : calcProfit.toFixed(2)}</StyledTableCell>
                 </StyledTableRow>
             );
         }
@@ -108,19 +108,19 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
 
     return (
         <>
-        <Table aria-label="customized table">
+        <Table aria-label='customized table'>
             <TableHead>
                 <TableRow>
-                    <StyledTableCell className='transaction-column-tittle' align="left">Currency Name</StyledTableCell>
-                    <StyledTableCell className='transaction-column-tittle' align="left">Currency Ammount</StyledTableCell>
-                    <StyledTableCell className='transaction-column-tittle' align="left">Currency Price</StyledTableCell>
-                    <StyledTableCell className='transaction-column-tittle' align="right">Profit (PLN)</StyledTableCell>
+                    <StyledTableCell className='transaction-column-tittle' align='left'>Currency Name</StyledTableCell>
+                    <StyledTableCell className='transaction-column-tittle' align='left'>Currency Ammount</StyledTableCell>
+                    <StyledTableCell className='transaction-column-tittle' align='left'>Currency Price</StyledTableCell>
+                    <StyledTableCell className='transaction-column-tittle' align='right'>Profit (PLN)</StyledTableCell>
                  </TableRow>
             </TableHead>
             <TableBody>
                 {transactionsWithCurrentPrices ? renderTransactions() : null}
                 <tr className='total-profit-row'>
-                    <StyledTableCell className={`total-profit ${totalProfit > 0 ? 'profit-plus' : 'profit-minus'}`} component="th" colspan="4" align="right">{totalProfit}</StyledTableCell>
+                    <StyledTableCell className={`total-profit ${totalProfit > 0 ? 'profit-plus' : 'profit-minus'}`} component='th' colSpan='4' align='right'>{totalProfit}</StyledTableCell>
                 </tr>
             </TableBody>
         </Table>

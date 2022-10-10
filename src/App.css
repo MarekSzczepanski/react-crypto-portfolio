@@ -18,6 +18,8 @@ h1, h2 {
 }
 .add-currency {
     display: flex;
+    align-items: flex-start;
+    padding: 14px 0;
 }
 .input-container {
     display: flex;
@@ -25,23 +27,25 @@ h1, h2 {
     width: 15vw;
     margin: 20px;
 }
-#currency-name {
-    position: absolute;
-    width: 15vw;
+.input-container:first-of-type {
+    margin-left: 0;
+}
+.proposal {
+    border: solid 1px transparent;
 }
 .proposal:hover {
-    border: solid 1px #444;
+    border-color: #444;
     cursor: pointer;
 }
 .display-none {
     display: none;
 }
-.add-transaction {
+button.add-transaction {
     height: 50px;
-    margin-top: 20px;
+    margin-top: 18px;
 }
-.proposal:first-of-type {
-    margin-top: 20px;
+.proposal:nth-of-type(2) {
+    margin-top: 10px;
 }
 .sign-forms-container {
     display: flex;
@@ -82,4 +86,7 @@ th.profit-minus {
 .total-profit-row > th.total-profit {
     font-size: 20px;
     font-weight: 700;
+}
+.hello {
+    text-align: center;
 }

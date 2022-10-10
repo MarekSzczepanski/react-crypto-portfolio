@@ -1,5 +1,6 @@
-import {useState} from 'react';
-import {useEffect} from 'react';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import {useState, useEffect} from 'react';
 
 const AddTransactionForm = ({userId, setTransactionAdded}) => {
     const [allNames, setAllNames] = useState(null);
@@ -9,16 +10,11 @@ const AddTransactionForm = ({userId, setTransactionAdded}) => {
     const [price, setPrice] = useState('');
     const [currencyId, setCurrencyId] = useState('');
 
-    useEffect(() => {
-        getCurrenciesNames();
-    }, []);
-
-    useEffect(() => {
-        renderCurrencyNameProposals();
-    }, [namesProposals]);
+    useEffect(() => { getCurrenciesNames() }, []);
+    useEffect(() => { renderCurrencyNameProposals() }, [namesProposals]);
 
     const handleTransactionDataChange = (e) => {
-        const nameOrProposal = e.target.parentNode.classList.contains('autocomplete');
+        const nameOrProposal = e.target.id === 'currency-name' || e.target.classList.contains('proposal');
         const ammount = document.getElementById('currency-ammount');
         const price = document.getElementById('currency-price');
 
@@ -37,7 +33,7 @@ const AddTransactionForm = ({userId, setTransactionAdded}) => {
     };
 
     const getCurrenciesNames = () => {
-        fetch("https://api.coingecko.com/api/v3/coins/list").then(res => res.json().then(res => setAllNames(res)));
+        fetch('https://api.coingecko.com/api/v3/coins/list').then(res => res.json().then(res => setAllNames(res)));
     };
 
     const checkCurrencyNameProposals = (e) => {
@@ -67,7 +63,7 @@ const AddTransactionForm = ({userId, setTransactionAdded}) => {
         e.preventDefault();
         
         fetch('http://localhost:5000/transactions/add' , {
-            method: "POST",
+            method: 'POST',
             headers: {
                 'Content-type': 'application/json'
             },
@@ -84,21 +80,18 @@ const AddTransactionForm = ({userId, setTransactionAdded}) => {
     return (
         <form className='add-currency' onSubmit={addTransaction}>
             <div className='input-container'>
-                <label htmlFor='currency-name'>Cryptocurrency name</label>
                 <div className='autocomplete'>
-                    <input id='currency-name' type='text' value={currencyName} onChange={(e) => handleTransactionDataChange(e)}/>
+                    <TextField id='currency-name' label='Crypto name' variant='standard' type='text' value={currencyName} onChange={(e) => handleTransactionDataChange(e)}/>
                     {namesProposals ? renderCurrencyNameProposals() : null}
                 </div>
             </div>
             <div className='input-container'>
-                <label htmlFor='currency-ammount'>Cryptocurrency ammount</label>
-                <input id='currency-ammount' type='text' value={ammount} onChange={(e) => handleTransactionDataChange(e)}/>
+                <TextField id='currency-ammount' label='Ammount' variant='standard' type='text' value={ammount} onChange={(e) => handleTransactionDataChange(e)}/>
             </div>
             <div className='input-container'>
-                <label htmlFor='currency-price'>Cryptocurrency price (PLN)</label>
-                <input id='currency-price' type='text' value={price} onChange={(e) => handleTransactionDataChange(e)}/>
+                <TextField id='currency-price' label='Price' variant='standard' type='text' value={price} onChange={(e) => handleTransactionDataChange(e)}/>
             </div>
-            <button className='add-transaction' type='submit'>Add transaction</button>
+            <Button className='add-transaction' variant='contained' type='submit'>Add transaction</Button>
         </form>
     )
 }

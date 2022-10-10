@@ -10,7 +10,7 @@ const LoginForm = ({setIsLoggedIn, setUsername, setUserId}) => {
         const password = document.getElementById('login-password').value;
     
         fetch('http://localhost:5000/auth/login' , {
-            method: "POST",
+            method: 'POST',
             headers: {
                 'Content-type': 'application/json'
             },
@@ -35,9 +35,9 @@ const LoginForm = ({setIsLoggedIn, setUsername, setUserId}) => {
                 <LockOpenIcon />
             </Avatar>
             <h2>Log in</h2>
-            <TextField className='sign-form-input-container' id='login-email' name="email" required label="Email" type='email' />
-            <TextField className='sign-form-input-container' id='login-password' name="login-password" required  label="Password" type='password' />
-            <Button className='sign-form-button' type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>Log in</Button>
+            <TextField className='sign-form-input-container' id='login-email' name='email' required label='Email' type='email' />
+            <TextField className='sign-form-input-container' id='login-password' name='login-password' required  label='Password' type='password' />
+            <Button className='sign-form-button' type='submit' variant='contained' sx={{ mt: 3, mb: 2 }}>Log in</Button>
         </form>
     )
 }
