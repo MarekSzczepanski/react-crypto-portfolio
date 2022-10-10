@@ -3,6 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
 
 const RegisterForm = () => {
     const [isHiddenInfo, setIsHiddenInfo] = useState(true);
@@ -30,7 +31,7 @@ const RegisterForm = () => {
         .then((res) => {
             if (res.registered) {
                 setIsHiddenInfo(false);
-                setTimeout(() => {setIsHiddenInfo(true);}, 2000);
+                setTimeout(() => { setIsHiddenInfo(true) }, 2000);
             }
         }))
     }
@@ -48,7 +49,7 @@ const RegisterForm = () => {
             <TextField className='sign-form-input-container' id='register-password-confirm' name='register-password-confirm' required label='Confirm password' type='password'/>
             <Button className='sign-form-button' type='submit' variant='contained' sx={{ mt: 3, mb: 2 }}>Register</Button>
         </form>
-        <div className={isHiddenInfo ? 'display-none' : null}>User Registered!</div>
+        <Alert className={`user-registered ${isHiddenInfo ? null : 'show-user-registered'}`} severity='success'>User Registered!</Alert>
     </>
     )
 }

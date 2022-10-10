@@ -37,8 +37,16 @@ h1, h2 {
     border-color: #444;
     cursor: pointer;
 }
-.display-none {
-    display: none;
+div.user-registered {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 2s;
+}
+div.show-user-registered {
+    opacity: 1;
 }
 button.add-transaction {
     height: 50px;
