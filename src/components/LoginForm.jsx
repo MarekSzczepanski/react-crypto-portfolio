@@ -21,8 +21,8 @@ const LoginForm = ({setIsLoggedIn, setUsername, setUserId, manageMessage}) => {
         })
         .then((res) => res.json()
         .then((res) => {
+            if (res.error === 'password') return manageMessage('error', 'Password is wrong.');
             if (res.error === 'error') return manageMessage('error', 'Something went wrong...') ;
-            if (res.error === 'password') return manageMessage('error', 'Password is wrong');
             if (res.loggedIn) {
                 setIsLoggedIn(true);
                 setUsername(res.username);

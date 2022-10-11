@@ -25,7 +25,7 @@ export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         
-        if (!email || !password)  return res.status(400);
+        if (!email || !password) return res.status(400);
 
         db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
             const dbPassword = results[0].password;

@@ -9,6 +9,7 @@
     position: absolute;
     width: 100vw;
     min-height: 100vh;
+    background-color: #FDFDFF;
 }
 h1 {
     margin-top: 50px;
