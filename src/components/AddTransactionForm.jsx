@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useState, useEffect} from 'react';
 
-const AddTransactionForm = ({userId, setTransactionAdded}) => {
+const AddTransactionForm = ({userId, setTransactionAdded, manageMessage}) => {
     const [allNames, setAllNames] = useState(null);
     const [namesProposals, setNamesProposals] = useState(null);
     const [currencyName, setCurrencyName] = useState('');
@@ -61,14 +61,23 @@ const AddTransactionForm = ({userId, setTransactionAdded}) => {
 
     const addTransaction = (e) => {
         e.preventDefault();
+
+        const findInputedName = allNames.find(name => name.name.toLowerCase() === currencyName.toLowerCase());
+        if (!findInputedName) return manageMessage('error', 'This currency doesn\'t exist.');
         
+        const nameToSend = findInputedName.name;
+        if (nameToSend) setCurrencyName(nameToSend);
+        else return manageMessage('error', 'Something went wrong...');
+
+        if (isNaN(Number(ammount)) || Number(ammount) < 0 || isNaN(Number(price)) || Number(price) < 0) return manageMessage('error', 'Ammount and price must be valid numbers.');
+
         fetch('http://localhost:5000/transactions/add' , {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
-                currencyName,
+                name: nameToSend,
                 ammount,
                 price,
                 userId,

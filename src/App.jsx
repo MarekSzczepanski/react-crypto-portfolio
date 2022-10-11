@@ -29,18 +29,18 @@ function App() {
       {isLoggedIn ?
         <main className='wrap'>
           <h2 className='hello'>Hello {username}!</h2> 
-          <AddTransactionForm userId={userId} setTransactionAdded={setTransactionAdded} />
-          <TransactionsContainer userId={userId} transactionAdded={transactionAdded} setTransactionAdded={setTransactionAdded} / >
+          <AddTransactionForm userId={userId} setTransactionAdded={setTransactionAdded} manageMessage={manageMessage} />
+          <TransactionsContainer userId={userId} transactionAdded={transactionAdded} setTransactionAdded={setTransactionAdded} />
         </main>
       :
       <main className='sign-forms-container'>
-        <LoginForm setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} setUserId={setUserId} manageMessage={manageMessage}/>
+        <LoginForm setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} setUserId={setUserId} manageMessage={manageMessage} />
         <RegisterForm manageMessage={manageMessage} />
-        <Alert className={`register-message ${displayMessage.display ? 'show-register-message' : ''}`} severity={displayMessage.severity}>
-            {displayMessage.content}
-        </Alert>
       </main>
       }
+      <Alert className={`register-message ${displayMessage.display ? 'show-register-message' : ''}`} severity={displayMessage.severity}>
+        {displayMessage.content}
+      </Alert>
     </div>
   );
 }
