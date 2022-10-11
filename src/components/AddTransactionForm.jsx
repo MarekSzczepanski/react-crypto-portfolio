@@ -8,28 +8,23 @@ const AddTransactionForm = ({userId, setTransactionAdded, manageMessage}) => {
     const [currencyName, setCurrencyName] = useState('');
     const [ammount, setAmmount] = useState('');
     const [price, setPrice] = useState('');
-    const [currencyId, setCurrencyId] = useState('');
 
     useEffect(() => { getCurrenciesNames() }, []);
     useEffect(() => { renderCurrencyNameProposals() }, [namesProposals]);
 
     const handleTransactionDataChange = (e) => {
-        const nameOrProposal = e.target.id === 'currency-name' || e.target.classList.contains('proposal');
-        const ammount = document.getElementById('currency-ammount');
-        const price = document.getElementById('currency-price');
+        const wasNameInputUnfocused = e._reactName === 'onBlur';
+        const clickTargetBeforeBlur = e.nativeEvent.explicitOriginalTarget.parentNode
+        const wasProposalNotChosenBeforeBlur = !(clickTargetBeforeBlur.classList.contains('autocomplete') || clickTargetBeforeBlur.classList.contains('proposal'));
+        const wasNameInputed = e.target.id === 'currency-name';
 
-        if (nameOrProposal) {
-            const proposalId = e.target.dataset.currency_id;
-            if (proposalId) {
-                setCurrencyId(proposalId);
-                return setCurrencyName(e.target.textContent);
-            }
-            setCurrencyId(null);
+        if (wasNameInputUnfocused && wasProposalNotChosenBeforeBlur) return setNamesProposals(null); 
+        if (wasNameInputed) {
             checkCurrencyNameProposals(e);
-            return setCurrencyName(e.target.value);
-        } 
-        if (e.target === ammount) return setAmmount(ammount.value);
-        if (e.target === price) return setPrice(price.value);
+            return setCurrencyName(e.target.value); 
+        }
+        setCurrencyName(e.target.textContent);
+        setNamesProposals(null);
     };
 
     const getCurrenciesNames = () => {
@@ -81,7 +76,7 @@ const AddTransactionForm = ({userId, setTransactionAdded, manageMessage}) => {
                 ammount,
                 price,
                 userId,
-                currencyId
+                currencyId: findInputedName.id
             })
         }).then(res => res.json().then(res => { if (res) setTransactionAdded(true) }));
     };
@@ -90,15 +85,15 @@ const AddTransactionForm = ({userId, setTransactionAdded, manageMessage}) => {
         <form className='add-currency' onSubmit={addTransaction}>
             <div className='input-container'>
                 <div className='autocomplete'>
-                    <TextField id='currency-name' label='Crypto name' variant='standard' type='text' value={currencyName} autoComplete="off" onChange={(e) => handleTransactionDataChange(e)} onBlur={() => setNamesProposals(null)}/>
+                    <TextField id='currency-name' label='Crypto name' variant='standard' type='text' value={currencyName} autoComplete="off" onChange={(e) => handleTransactionDataChange(e)} onBlur={(e) => handleTransactionDataChange(e)}/>
                     {namesProposals ? renderCurrencyNameProposals() : null}
                 </div>
             </div>
             <div className='input-container'>
-                <TextField id='currency-ammount' label='Ammount' variant='standard' type='text' value={ammount} autoComplete="off" onChange={(e) => handleTransactionDataChange(e)}/>
+                <TextField id='currency-ammount' label='Ammount' variant='standard' type='text' value={ammount} autoComplete="off" onChange={(e) => setAmmount(e.target.value)}/>
             </div>
             <div className='input-container'>
-                <TextField id='currency-price' label='Price' variant='standard' type='text' value={price} autoComplete="off" onChange={(e) => handleTransactionDataChange(e)}/>
+                <TextField id='currency-price' label='Price' variant='standard' type='text' value={price} autoComplete="off" onChange={(e) => setPrice(e.target.value)}/>
             </div>
             <Button className='add-transaction' variant='contained' type='submit'>Add transaction</Button>
         </form>
