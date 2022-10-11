@@ -40,7 +40,7 @@ const AddTransactionForm = ({userId, setTransactionAdded}) => {
         const currencyNameInput = e.target.value || e.target.textContent;
         const proposals = allNames.filter(proposal => currencyNameInput.toLowerCase() === proposal.name.substring(0, currencyNameInput.length).toLowerCase());
 
-        if (!proposals.length) return;
+        if (!proposals.length) return setNamesProposals(null);
 
         setNamesProposals(proposals);
         renderCurrencyNameProposals();
@@ -81,7 +81,7 @@ const AddTransactionForm = ({userId, setTransactionAdded}) => {
         <form className='add-currency' onSubmit={addTransaction}>
             <div className='input-container'>
                 <div className='autocomplete'>
-                    <TextField id='currency-name' label='Crypto name' variant='standard' type='text' value={currencyName} autoComplete="off" onChange={(e) => handleTransactionDataChange(e)}/>
+                    <TextField id='currency-name' label='Crypto name' variant='standard' type='text' value={currencyName} autoComplete="off" onChange={(e) => handleTransactionDataChange(e)} onBlur={() => setNamesProposals(null)}/>
                     {namesProposals ? renderCurrencyNameProposals() : null}
                 </div>
             </div>
