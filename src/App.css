@@ -75,7 +75,7 @@ button.add-transaction {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 30vw;
+    width: 35vw;
     max-width: 500px;
     padding: 50px 0;
     border: solid 1px #eee;
@@ -120,4 +120,39 @@ svg.delete-icon {
 }
 th.transaction-column-tittle.MuiTableCell-head {
     background-color: var(--metal);
+}
+
+@media (max-width: 1024px) {
+    .sign-forms-container {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 40px;
+    }
+    .sign-form {
+       width: 88vw; 
+       max-width: 400px;
+    }
+    .sign-form:first-of-type {
+        margin-bottom: 50px;
+    }
+    th.transaction-column-tittle.MuiTableCell-head, .transaction > th.MuiTableCell-body {
+        font-size: 11px;
+        padding: 4px 10px;
+    }
+    .transaction > th.MuiTableCell-body:last-of-type {
+        position: relative;
+        padding: 16px 10px;
+    }
+    svg.delete-icon {
+        display: none;
+    }
+    .add-currency {
+        flex-direction: column;
+        align-items: stretch;
+        margin-bottom: 30px;
+    }
+    .input-container, .autocomplete > div {
+        width: 100%;
+        margin-left: 0;
+    }
 }
