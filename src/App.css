@@ -5,6 +5,9 @@
     box-sizing: border-box;
     font-family: 'Roboto Mono', monospace !important;
 }
+:root {
+    --metal: #0B0705;
+}
 .App {
     position: absolute;
     width: 100vw;
@@ -18,6 +21,7 @@ h1 {
 h1, h2 {
     font-weight: 700;
     letter-spacing: 1px;
+    color: var(--metal);
 }
 .wrap {
     padding: 20px;
@@ -103,4 +107,13 @@ th.profit-minus {
 }
 .hello {
     text-align: center;
+}
+.delete-icon {
+    margin-left: 6px;
+    transform: translateY(6px);
+    color: var(--metal);
+    cursor: pointer;
+}
+th.transaction-column-tittle.MuiTableCell-head {
+    background-color: var(--metal);
 }

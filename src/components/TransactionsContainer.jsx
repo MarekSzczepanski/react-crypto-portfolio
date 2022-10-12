@@ -5,13 +5,15 @@ import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import DeleteIcon from '@mui/icons-material/Delete';
 import {useState, useEffect} from 'react';
 
-const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) => {
+const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded, manageMessage}) => {
     const [transactions, setTransactions] = useState(null);
     const [currentPricesFetched, setCurrentPricesFetched] = useState(null);
     const [transactionsWithCurrentPrices, setTransactionsWithCurrentPrices] = useState(null);
     const [totalProfit, setTotalProfit] = useState(null);
+    const [removedTransactionsIds, setRemovedTransactionsIds] = useState([]);
 
     useEffect(() => { getTransactions() }, []);
     useEffect(() => { 
@@ -21,6 +23,10 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
     useEffect(() => { if (currentPricesFetched) setCurrentPricesForTransactions(currentPricesFetched) }, [currentPricesFetched]);
     useEffect(() => { if (transactionAdded) setTransactions(null)}, [transactionAdded]);
     useEffect(() => { if (transactionsWithCurrentPrices) countTotalProfit()}, [transactionsWithCurrentPrices]);
+    useEffect(() => { 
+        renderTransactions();
+        countTotalProfit();
+    }, [removedTransactionsIds]);
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
@@ -50,6 +56,20 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
             headers: { 'Content-type': 'application/json'}
         }).then(res => res.json().then(res => setTransactions(res.transactions)));
     };
+
+    const deleteTransaction = (e) => {
+        const transactionId = e.target.dataset.transaction_id || e.target.parentNode.dataset.transaction_id;
+        
+        if (!transactionId) return manageMessage('error', 'Something went wrong...');
+
+        fetch(`http://localhost:5000/transactions/remove?id=${transactionId}`, {
+            method: 'DELETE',
+            headers: { 'Content-type': 'application/json'}
+        }).then(res => res.json().then(res => {
+            if (res.deleted) return setRemovedTransactionsIds([...removedTransactionsIds, Number(transactionId)]);
+            manageMessage('error', 'Something went wrong...');
+        }));
+    }
 
     const getCurrentPrices = () => {
         const currenciesIds = transactions.map(transaction => transaction.currency_id);
@@ -86,22 +106,28 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded}) 
 
     const renderTransactions = () => {
         if (!transactions) return;
-        
+
         const transaction_divs = [];
         for (let i=0; i<transactions.length; i++) {
             const transaction = transactions[i];
+            const transactionId = transaction.id;
             const ammount = Number(transaction.ammount);
             const boughtFor = Number(transaction.price);
             const calcProfit = ammount * transaction.currentPrice - ammount * boughtFor;
 
-            transaction_divs.push(
-                <StyledTableRow className='transaction' key={i} data-currency_id={transaction.currency_id}>
-                    <StyledTableCell className='transaction-field' component='th' scope='row'>{transaction.name}</StyledTableCell>
-                    <StyledTableCell className='transaction-field' data-currency_ammount='' component='th' scope='row'>{ammount}</StyledTableCell>
-                    <StyledTableCell className='transaction-field' data-currency_price='' component='th' scope='row'>{boughtFor}</StyledTableCell>
-                    <StyledTableCell className={`transaction-field profit ${calcProfit > 0 ? 'profit-plus' : 'profit-minus'}`} data-profit='' component='th' scope='row' align='right'>{isNaN(calcProfit) ? '?' : calcProfit.toFixed(2)}</StyledTableCell>
-                </StyledTableRow>
-            );
+            if (!removedTransactionsIds.includes(transactionId)) {
+                transaction_divs.push(
+                    <StyledTableRow className='transaction' key={i} data-currency_id={transaction.currency_id}>
+                        <StyledTableCell className='transaction-field' component='th' scope='row'>{transaction.name}</StyledTableCell>
+                        <StyledTableCell className='transaction-field' data-currency_ammount='' component='th' scope='row'>{ammount}</StyledTableCell>
+                        <StyledTableCell className='transaction-field' data-currency_price='' component='th' scope='row'>{boughtFor}</StyledTableCell>
+                        <StyledTableCell className={`transaction-field profit ${calcProfit > 0 ? 'profit-plus' : 'profit-minus'}`} data-profit='' component='th' scope='row' align='right'>
+                            {isNaN(calcProfit) ? '?' : calcProfit.toFixed(2)}
+                            <DeleteIcon className='delete-icon' data-transaction_id={transactionId} onClick={(e) => deleteTransaction(e)}></DeleteIcon>
+                        </StyledTableCell>
+                    </StyledTableRow>
+                );
+            }; 
         }
         return transaction_divs;
     };

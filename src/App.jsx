@@ -30,7 +30,7 @@ function App() {
         <main className='wrap'>
           <h2 className='hello'>Hello {username}!</h2> 
           <AddTransactionForm userId={userId} setTransactionAdded={setTransactionAdded} manageMessage={manageMessage} />
-          <TransactionsContainer userId={userId} transactionAdded={transactionAdded} setTransactionAdded={setTransactionAdded} />
+          <TransactionsContainer userId={userId} transactionAdded={transactionAdded} setTransactionAdded={setTransactionAdded} manageMessage={manageMessage} />
         </main>
       :
       <main className='sign-forms-container'>
