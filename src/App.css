@@ -108,11 +108,15 @@ th.profit-minus {
 .hello {
     text-align: center;
 }
-.delete-icon {
+svg.delete-icon {
     margin-left: 6px;
     transform: translateY(6px);
     color: var(--metal);
+    transition: color .2s ease-out;
     cursor: pointer;
+}
+.delete-icon:hover {
+    color: red;
 }
 th.transaction-column-tittle.MuiTableCell-head {
     background-color: var(--metal);
