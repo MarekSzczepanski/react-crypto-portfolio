@@ -9,6 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import {useState, useEffect} from 'react';
 
 const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded, manageMessage}) => {
+    const DOMAIN = process.env.DOMAIN || 'http://localhost:5000';
     const [transactions, setTransactions] = useState(null);
     const [currentPricesFetched, setCurrentPricesFetched] = useState(null);
     const [transactionsWithCurrentPrices, setTransactionsWithCurrentPrices] = useState(null);
@@ -51,7 +52,7 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded, m
         if (transactions) return;
         if (transactionAdded) setTransactionAdded(false);
 
-        fetch(`http://localhost:5000/transactions/fetch?id=${userId}`, {
+        fetch(`${DOMAIN}/transactions/fetch?id=${userId}`, {
             method: 'GET',
             headers: { 'Content-type': 'application/json'}
         }).then(res => res.json().then(res => setTransactions(res.transactions)));
@@ -62,7 +63,7 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded, m
         
         if (!transactionId) return manageMessage('error', 'Something went wrong...');
 
-        fetch(`http://localhost:5000/transactions/remove?id=${transactionId}`, {
+        fetch(`${DOMAIN}/transactions/remove?id=${transactionId}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json'}
         }).then(res => res.json().then(res => {

@@ -8,8 +8,9 @@ const LoginForm = ({setIsLoggedIn, setUsername, setUserId, manageMessage}) => {
         e.preventDefault();
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
-    
-        fetch('http://localhost:5000/auth/login' , {
+
+        const DOMAIN = process.env.DOMAIN || 'http://localhost:5000';
+        fetch(`${DOMAIN}/auth/login` , {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'

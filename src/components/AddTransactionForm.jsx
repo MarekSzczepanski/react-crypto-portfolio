@@ -65,8 +65,9 @@ const AddTransactionForm = ({userId, setTransactionAdded, manageMessage}) => {
         else return manageMessage('error', 'Something went wrong...');
 
         if (isNaN(Number(ammount)) || Number(ammount) < 0 || isNaN(Number(price)) || Number(price) < 0) return manageMessage('error', 'Ammount and price must be valid numbers.');
-
-        fetch('http://localhost:5000/transactions/add' , {
+        
+        const DOMAIN = process.env.DOMAIN || 'http://localhost:5000';
+        fetch(`${DOMAIN}/transactions/add` , {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'

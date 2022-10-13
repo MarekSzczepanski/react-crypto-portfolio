@@ -12,8 +12,9 @@ const RegisterForm = ({manageMessage}) => {
         const confirmPassword = document.getElementById('register-password-confirm').value;
 
         if (password !== confirmPassword) return manageMessage('error', 'Passwords don\'t match!') ;
-    
-        fetch('http://localhost:5000/auth/register' , {
+        
+        const DOMAIN = process.env.DOMAIN || 'http://localhost:5000';
+        fetch(`${DOMAIN}/auth/register` , {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
