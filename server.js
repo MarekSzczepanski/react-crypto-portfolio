@@ -4,7 +4,7 @@ import {authRouter} from './routes/auth.js';
 import {transactionsRouter} from './routes/transactions.js';
 import {db} from './db.js';
 
-const port = '5000';
+const port = process.env.PORT || 5145
 const app = express();
 
 app.use(cors());
@@ -19,6 +19,6 @@ db.connect((err) => {
 app.use('/auth', authRouter);
 app.use('/transactions', transactionsRouter);
 
-app.listen(5000, () => {
+app.listen(port, () => {
     console.log(`server started on port ${port}`);
 });

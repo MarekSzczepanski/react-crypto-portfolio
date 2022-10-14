@@ -9,8 +9,7 @@ const LoginForm = ({setIsLoggedIn, setUsername, setUserId, manageMessage}) => {
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
 
-        const DOMAIN = process.env.DOMAIN || 'http://localhost:5000';
-        fetch(`${DOMAIN}/auth/login` , {
+        fetch(`http://crypto.vyost.usermd.net:12476/auth/login` , {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'

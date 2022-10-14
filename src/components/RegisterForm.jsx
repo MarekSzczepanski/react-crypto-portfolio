@@ -13,8 +13,7 @@ const RegisterForm = ({manageMessage}) => {
 
         if (password !== confirmPassword) return manageMessage('error', 'Passwords don\'t match!') ;
         
-        const DOMAIN = process.env.DOMAIN || 'http://localhost:5000';
-        fetch(`${DOMAIN}/auth/register` , {
+        fetch(`http://crypto.vyost.usermd.net:12476/auth/register` , {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
