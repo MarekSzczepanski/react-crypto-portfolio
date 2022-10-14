@@ -10,7 +10,7 @@
 }
 .App {
     position: absolute;
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     background-color: #FDFDFF;
 }
@@ -120,6 +120,20 @@ svg.delete-icon {
 }
 th.transaction-column-tittle.MuiTableCell-head {
     background-color: var(--metal);
+}
+footer {
+    height: 40px;
+    padding: 10px;
+    text-align: center;
+    background-color: var(--metal);
+    color: #fff;
+}
+a {
+    color: #8dc647;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
 }
 
 @media (max-width: 1024px) {

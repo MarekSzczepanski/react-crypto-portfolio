@@ -41,6 +41,7 @@ function App() {
       <Alert className={`register-message ${displayMessage.display ? 'show-register-message' : ''}`} severity={displayMessage.severity}>
         {displayMessage.content}
       </Alert>
+      <footer>Data provided by <a href='https://www.coingecko.com'>CoinGecko</a>. App created by Marek Szczepański.</footer>
     </div>
   );
 }
