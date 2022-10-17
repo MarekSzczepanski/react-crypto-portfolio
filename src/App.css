@@ -24,7 +24,7 @@ h1, h2 {
     color: var(--metal);
 }
 .wrap {
-    padding: 20px;
+    padding: 20px 20px 60px 20px;
 }
 .add-currency {
     display: flex;
@@ -122,6 +122,9 @@ th.transaction-column-tittle.MuiTableCell-head {
     background-color: var(--metal);
 }
 footer {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
     height: 40px;
     padding: 10px;
     text-align: center;

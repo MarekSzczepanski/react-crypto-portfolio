@@ -9,7 +9,7 @@ const LoginForm = ({setIsLoggedIn, setUsername, setUserId, manageMessage}) => {
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
 
-        fetch(`http://crypto.vyost.usermd.net:12476/auth/login` , {
+        fetch(`https://crypto.vyost.usermd.net:60332/auth/login` , {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'

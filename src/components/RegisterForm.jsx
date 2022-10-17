@@ -13,7 +13,7 @@ const RegisterForm = ({manageMessage}) => {
 
         if (password !== confirmPassword) return manageMessage('error', 'Passwords don\'t match!') ;
         
-        fetch(`http://crypto.vyost.usermd.net:12476/auth/register` , {
+        fetch(`https://crypto.vyost.usermd.net:60332/auth/register` , {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'

@@ -66,7 +66,7 @@ const AddTransactionForm = ({userId, setTransactionAdded, manageMessage}) => {
 
         if (isNaN(Number(ammount)) || Number(ammount) < 0 || isNaN(Number(price)) || Number(price) < 0) return manageMessage('error', 'Ammount and price must be valid numbers.');
         
-        fetch(`http://crypto.vyost.usermd.net:12476/transactions/add` , {
+        fetch(`https://crypto.vyost.usermd.net:60332/transactions/add` , {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'

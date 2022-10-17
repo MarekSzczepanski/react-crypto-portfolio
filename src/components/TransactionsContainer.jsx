@@ -51,7 +51,7 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded, m
         if (transactions) return;
         if (transactionAdded) setTransactionAdded(false);
 
-        fetch(`http://crypto.vyost.usermd.net:12476/transactions/fetch?id=${userId}`, {
+        fetch(`https://crypto.vyost.usermd.net:60332/transactions/fetch?id=${userId}`, {
             method: 'GET',
             headers: { 'Content-type': 'application/json'}
         }).then(res => res.json().then(res => setTransactions(res.transactions)));
@@ -62,7 +62,7 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded, m
         
         if (!transactionId) return manageMessage('error', 'Something went wrong...');
 
-        fetch(`http://crypto.vyost.usermd.net:12476/transactions/remove?id=${transactionId}`, {
+        fetch(`https://crypto.vyost.usermd.net:60332/transactions/remove?id=${transactionId}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json'}
         }).then(res => res.json().then(res => {

@@ -3,6 +3,9 @@
 .env
 .env-data.txt
 
+cert.key
+cert.pem
+
 # dependencies
 /node_modules
 /.pnp
