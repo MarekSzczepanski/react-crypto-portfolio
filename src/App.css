@@ -124,7 +124,7 @@ th.transaction-column-tittle.MuiTableCell-head {
 footer {
     position: absolute;
     bottom: 0;
-    width: 100vw;
+    width: 100%;
     height: 40px;
     padding: 10px;
     text-align: center;
