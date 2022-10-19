@@ -12,7 +12,7 @@ export const add = (req, res) => {
 }
 
 export const fetch = (req, res) => {
-  db.query(`SELECT * FROM transactions WHERE user_id = ${req.query.id}`, async (err, results) => {
+  db.query('SELECT * FROM transactions WHERE user_id = ?', [req.query.id], async (err, results) => {
     if (err) return console.log(err);
     res.send({transactions: results});
     res.end();
@@ -20,7 +20,7 @@ export const fetch = (req, res) => {
 }
 
 export const remove = (req, res) => {
-  db.query(`DELETE FROM transactions WHERE id = ${req.query.id}`, async (err, results) => {
+  db.query('DELETE FROM transactions WHERE id = ?', [req.query.id], async (err, results) => {
     if (err) return console.log(err);
     console.log('Transaction deleted');
     res.send({deleted: true});
