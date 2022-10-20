@@ -1,3 +1,4 @@
+import NameProposal from './NameProposal';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useState, useEffect} from 'react';
@@ -10,7 +11,6 @@ const AddTransactionForm = ({userId, setTransactionAdded, manageMessage}) => {
     const [price, setPrice] = useState('');
 
     useEffect(() => { getCurrenciesNames() }, []);
-    useEffect(() => { renderCurrencyNameProposals() }, [namesProposals]);
 
     const handleNameInputChange = (e) => {
         checkCurrencyNameProposals(e);
@@ -33,20 +33,6 @@ const AddTransactionForm = ({userId, setTransactionAdded, manageMessage}) => {
         if (!proposals.length) return setNamesProposals(null);
 
         setNamesProposals(proposals);
-        renderCurrencyNameProposals();
-    };
-
-    const renderCurrencyNameProposals = () => {
-        if (!namesProposals) return false;
-        
-        let proposals = [];
-        for (let i=0; i<namesProposals.length; i++) {
-          if (i > 10) break;
-          if (currencyName !== namesProposals[i].name) {
-            proposals.push(<div className='proposal' key={i} data-currency_id={namesProposals[i].id} onClick={(e) => handleProposalClick(e)}>{namesProposals[i].name}</div>);
-          } 
-        }
-        return proposals;
     };
 
     const addTransaction = (e) => {
@@ -81,7 +67,9 @@ const AddTransactionForm = ({userId, setTransactionAdded, manageMessage}) => {
             <div className='input-container'>
                 <div className='autocomplete'>
                     <TextField id='currency-name' label='Crypto name' variant='standard' type='text' value={currencyName} autoComplete="off" onChange={(e) => handleNameInputChange(e)} onBlur={(e) => e.relatedTarget ? setNamesProposals(null) : null}/>
-                    {namesProposals ? renderCurrencyNameProposals() : null}
+                    {namesProposals ? namesProposals.map((proposal, i) => {
+                        return <NameProposal currencyId={proposal.id} name={proposal.name} handleProposalClick={(e) => handleProposalClick(e)} key={i} />
+                    }) : null}
                 </div>
             </div>
             <div className='input-container'>
