@@ -8,6 +8,25 @@ import TableRow from '@mui/material/TableRow';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useState, useEffect} from 'react';
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
+}));
+  
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+    },
+    '&:last-child td, &:last-child th': {
+        border: 0,
+    },
+}));
+
 const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded, manageMessage}) => {
     const [transactions, setTransactions] = useState(null);
     const [currentPricesFetched, setCurrentPricesFetched] = useState(null);
@@ -27,25 +46,6 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded, m
         renderTransactions();
         countTotalProfit();
     }, [removedTransactionsIds]);
-
-    const StyledTableCell = styled(TableCell)(({ theme }) => ({
-        [`&.${tableCellClasses.head}`]: {
-            backgroundColor: theme.palette.common.black,
-            color: theme.palette.common.white,
-        },
-        [`&.${tableCellClasses.body}`]: {
-            fontSize: 14,
-        },
-    }));
-      
-    const StyledTableRow = styled(TableRow)(({ theme }) => ({
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.action.hover,
-        },
-        '&:last-child td, &:last-child th': {
-            border: 0,
-        },
-    }));
 
     const getTransactions = () => {
         if (transactions) return;
