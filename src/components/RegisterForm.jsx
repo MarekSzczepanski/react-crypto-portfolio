@@ -18,9 +18,12 @@ const RegisterForm = ({manageMessage}) => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ name, email, password })
         }).then(response => {
+            console.log(response)
             if (!response.ok) return Promise.reject(response);  
             return response.json();
-        }).then(res => { if (res.registered) return manageMessage('success', 'User Registered!') })
+        }).then(res => { 
+            if (res.registered) return manageMessage('success', 'User Registered!')
+         })
         .catch(error => {
             if (typeof error.json === 'function') {
                 error.json().then(jsonError => {
