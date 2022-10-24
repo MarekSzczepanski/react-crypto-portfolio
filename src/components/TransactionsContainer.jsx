@@ -65,10 +65,10 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded, m
         fetch(`https://crypto.vyost.usermd.net:60332/transactions/remove?id=${transactionId}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json'}
-        }).then(res => res.json().then(res => {
-            if (res.deleted) return setRemovedTransactionsIds([...removedTransactionsIds, Number(transactionId)]);
+        }).then(res => {
+            if (res.status === 200) return setRemovedTransactionsIds([...removedTransactionsIds, Number(transactionId)]);
             manageMessage('error', 'Something went wrong...');
-        }));
+        });
     }
 
     const getCurrentPrices = () => {

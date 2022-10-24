@@ -11,30 +11,32 @@ const RegisterForm = ({manageMessage}) => {
         const password = document.getElementById('register-password').value;
         const confirmPassword = document.getElementById('register-password-confirm').value;
 
-        if (password !== confirmPassword) return manageMessage('error', 'Passwords don\'t match!') ;
-        
-        fetch(`https://crypto.vyost.usermd.net:60332/auth/register` , {
+        if (password !== confirmPassword) return manageMessage('error', 'Passwords don\'t match!');
+
+        fetch(`https://crypto.vyost.usermd.net:60332/auth/register`, {
             method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                name,
-                email,
-                password,
-                confirmPassword
-            })
-        })
-        .then((res) => res.json()
-        .then((res) => {
-            if (res.registered) return manageMessage('success', 'User Registered!') ;
-            if (res.error === 'error') return manageMessage('error', 'Something went wrong...') ;
-            if (res.error === 'email') return manageMessage('error', 'This email address has been used');
-        }))
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ name, email, password })
+        }).then(response => {
+            if (!response.ok) return Promise.reject(response);  
+            return response.json();
+        }).then(res => { if (res.registered) return manageMessage('success', 'User Registered!') })
+        .catch(error => {
+            if (typeof error.json === 'function') {
+                error.json().then(jsonError => {
+                    if (jsonError.error === 'error') return manageMessage('error', 'Something went wrong...');
+                    if (jsonError.error === 'email') return manageMessage('error', 'This email address has been used');
+                }).catch(genericError => {
+                    console.log(error.statusText);
+                });
+            } else {
+                console.log('Fetch error');
+                console.log(error);
+            }
+        });
     }
 
     return (
-    <>
         <form className='sign-form' onSubmit={registerUser}>
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                 <LockOutlinedIcon />
@@ -46,7 +48,6 @@ const RegisterForm = ({manageMessage}) => {
             <TextField className='sign-form-input-container' id='register-password-confirm' name='register-password-confirm' required label='Confirm password' type='password'/>
             <Button className='sign-form-button' type='submit' variant='contained' sx={{ mt: 3, mb: 2 }}>Register</Button>
         </form>
-    </>
     )
 }
 

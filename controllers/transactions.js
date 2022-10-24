@@ -6,7 +6,7 @@ export const add = (req, res) => {
   db.query('INSERT INTO transactions SET ?', {user_id: userId, name, ammount, price, currency_id: currencyId}, (err, results) => {
     if (err) return console.log(err)
     console.log('Transaction added');
-    res.send({added: true});
+    res.status(201).send({added: true});
     res.end();
   });
 }
@@ -14,7 +14,7 @@ export const add = (req, res) => {
 export const fetch = (req, res) => {
   db.query('SELECT * FROM transactions WHERE user_id = ?', [req.query.id], async (err, results) => {
     if (err) return console.log(err);
-    res.send({transactions: results});
+    res.status(200).send({transactions: results});
     res.end();
   });
 }
@@ -23,7 +23,7 @@ export const remove = (req, res) => {
   db.query('DELETE FROM transactions WHERE id = ?', [req.query.id], async (err, results) => {
     if (err) return console.log(err);
     console.log('Transaction deleted');
-    res.send({deleted: true});
+    res.status(200).send('deleted');
     res.end();
   });
 }
