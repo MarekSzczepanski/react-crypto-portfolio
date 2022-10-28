@@ -6,7 +6,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -33,6 +33,8 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded, m
     const [transactionsWithCurrentPrices, setTransactionsWithCurrentPrices] = useState(null);
     const [totalProfit, setTotalProfit] = useState(null);
     const [removedTransactionsIds, setRemovedTransactionsIds] = useState([]);
+
+    const transactionsRef = useRef();
 
     useEffect(() => { getTransactions() }, []);
     useEffect(() => { 
@@ -94,9 +96,9 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded, m
     };
 
     const countTotalProfit = () => {
-        const profits = document.querySelectorAll('[data-profit]');
+        const profits = transactionsRef.current.querySelectorAll('[data-profit]');
         let total = 0;
-        
+
         for (let i=0; i<profits.length; i++) {
             if (!isNaN(Number(profits[i].textContent))) total += Number(profits[i].textContent);
         }
@@ -143,7 +145,7 @@ const TransactionsContainer = ({userId, transactionAdded, setTransactionAdded, m
                     <StyledTableCell className='transaction-column-tittle' align='right'>Profit (PLN)</StyledTableCell>
                  </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody ref={transactionsRef}>
                 {transactionsWithCurrentPrices ? renderTransactions() : null}
                 <tr className='total-profit-row'>
                     <StyledTableCell className={`total-profit ${totalProfit > 0 ? 'profit-plus' : 'profit-minus'}`} component='th' colSpan='4' align='right'>{totalProfit}</StyledTableCell>

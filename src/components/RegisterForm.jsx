@@ -6,10 +6,12 @@ import Button from '@mui/material/Button';
 const RegisterForm = ({manageMessage}) => {
     const registerUser = (e) => {
         e.preventDefault();
-        const name = document.getElementById('register-name').value;
-        const email = document.getElementById('register-email').value;
-        const password = document.getElementById('register-password').value;
-        const confirmPassword = document.getElementById('register-password-confirm').value;
+        const name = e.target.elements['register-name'].value;
+        const email = e.target.elements.email.value;
+        const password = e.target.elements['register-password'].value;
+        const confirmPassword = e.target.elements['register-password-confirm'].value;
+
+        console.log(e.target)
 
         if (password !== confirmPassword) return manageMessage('error', 'Passwords don\'t match!');
 
@@ -18,7 +20,6 @@ const RegisterForm = ({manageMessage}) => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ name, email, password })
         }).then(response => {
-            console.log(response)
             if (!response.ok) return Promise.reject(response);  
             return response.json();
         }).then(res => { 

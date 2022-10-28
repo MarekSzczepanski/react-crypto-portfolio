@@ -6,8 +6,8 @@ import Button from '@mui/material/Button';
 const LoginForm = ({setIsLoggedIn, setUsername, setUserId, manageMessage}) => {
     const LogIn = (e) => {
         e.preventDefault();
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
+        const email = e.target.elements.email.value;
+        const password = e.target.elements['login-password'].value;
 
         fetch(`https://crypto.vyost.usermd.net:60332/auth/login` , {
             method: 'POST',
