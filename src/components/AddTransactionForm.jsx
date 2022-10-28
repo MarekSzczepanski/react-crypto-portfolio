@@ -68,7 +68,7 @@ const AddTransactionForm = ({userId, setTransactionAdded, manageMessage}) => {
                 <div className='autocomplete'>
                     <TextField id='currency-name' label='Crypto name' variant='standard' type='text' value={currencyName} autoComplete="off" onChange={(e) => handleNameInputChange(e)} onBlur={(e) => e.relatedTarget ? setNamesProposals(null) : null}/>
                     {namesProposals ? namesProposals.map((proposal, i) => {
-                        return <NameProposal currencyId={proposal.id} name={proposal.name} handleProposalClick={(e) => handleProposalClick(e)} key={i} />
+                        return i < 10 ? <NameProposal currencyId={proposal.id} name={proposal.name} handleProposalClick={(e) => handleProposalClick(e)} key={i} /> : null
                     }) : null}
                 </div>
             </div>

@@ -11,8 +11,6 @@ const RegisterForm = ({manageMessage}) => {
         const password = e.target.elements['register-password'].value;
         const confirmPassword = e.target.elements['register-password-confirm'].value;
 
-        console.log(e.target)
-
         if (password !== confirmPassword) return manageMessage('error', 'Passwords don\'t match!');
 
         fetch(`https://crypto.vyost.usermd.net:60332/auth/register`, {
