@@ -27,6 +27,8 @@ export const login = async (req, res) => {
         if (!email || !password) return res.status(400);
 
         db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
+            if (!results[0]) return res.status(401).send({error: 'no user'});
+
             const dbPassword = results[0].password;
             
             if (err) return  res.status(500).send({error: 'error'});
