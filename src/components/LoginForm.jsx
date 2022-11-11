@@ -23,6 +23,7 @@ const LoginForm = ({setIsLoggedIn, setUsername, setUserId, manageMessage}) => {
         .then((res) => {
             if (res.error === 'password') return manageMessage('error', 'Password is wrong.');
             if (res.error === 'error') return manageMessage('error', 'Something went wrong...') ;
+            if (res.error === 'no user') return manageMessage('error', 'This user doesn\'t exist') ;
             if (res.loggedIn) {
                 setIsLoggedIn(true);
                 setUsername(res.username);
