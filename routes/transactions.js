@@ -1,7 +1,9 @@
 import express from 'express';
-import {add, fetch, remove} from '../controllers/transactions.js';
+import { add, fetch, remove } from '../controllers/transactions';
 
-export const transactionsRouter = express.Router();
+const transactionsRouter = express.Router();
+
+export default transactionsRouter;
 
 transactionsRouter.post('/add', add);
 transactionsRouter.get('/fetch', fetch);

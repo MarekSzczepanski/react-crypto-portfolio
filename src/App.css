@@ -1,173 +1,177 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto Mono', monospace !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto Mono', monospace !important;
 }
 :root {
-    --metal: #0B0705;
+  --metal: #0b0705;
 }
 .App {
-    position: absolute;
-    width: 100%;
-    min-height: 100vh;
-    background-color: #FDFDFF;
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fdfdff;
 }
 h1 {
-    margin-top: 50px;
-    text-align: center;
+  margin-top: 50px;
+  text-align: center;
 }
-h1, h2 {
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: var(--metal);
+h1,
+h2 {
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--metal);
 }
 .wrap {
-    padding: 20px 20px 60px 20px;
+  padding: 20px 20px 60px 20px;
 }
 .add-currency {
-    display: flex;
-    align-items: flex-start;
-    padding: 14px 0;
+  display: flex;
+  align-items: flex-start;
+  padding: 14px 0;
 }
 .input-container {
-    display: flex;
-    flex-direction: column;
-    width: 15vw;
-    margin: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 15vw;
+  margin: 20px;
 }
 .input-container:first-of-type {
-    margin-left: 0;
+  margin-left: 0;
 }
 .proposal {
-    border: solid 1px transparent;
+  border: solid 1px transparent;
 }
 .proposal:hover {
-    border-color: #444;
-    cursor: pointer;
+  border-color: #444;
+  cursor: pointer;
 }
 div.register-message {
-    position: absolute;
-    top: 50vh;
-    left: 50vw;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 2s;
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 2s;
 }
 div.show-register-message {
-    opacity: 1;
+  opacity: 1;
 }
 button.add-transaction {
-    height: 50px;
-    margin-top: 18px;
+  height: 50px;
+  margin-top: 18px;
 }
 .proposal:nth-of-type(2) {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 .sign-forms-container {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 100px;
-    padding-bottom: 120px;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 100px;
+  padding-bottom: 120px;
 }
 .sign-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 35vw;
-    max-width: 500px;
-    padding: 50px 0;
-    border: solid 1px #eee;
-    border-radius: 8px;
-    box-shadow: 10px 15px 5px #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 35vw;
+  max-width: 500px;
+  padding: 50px 0;
+  border: solid 1px #eee;
+  border-radius: 8px;
+  box-shadow: 10px 15px 5px #ddd;
 }
-div.sign-form-input-container, .sign-form-button {
-    width: 60%;
-    margin-top: 16px;
+div.sign-form-input-container,
+.sign-form-button {
+  width: 60%;
+  margin-top: 16px;
 }
 div.sign-form-input-container:last-of-type {
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 button.sign-form-button {
-    margin-top: auto;
+  margin-top: auto;
 }
 th.profit {
-    font-weight: 500;
+  font-weight: 500;
 }
 th.profit-plus {
-    color: green;
+  color: green;
 }
 th.profit-minus {
-    color: red;
+  color: red;
 }
 .total-profit-row > th.total-profit {
-    font-size: 20px;
-    font-weight: 700;
+  font-size: 20px;
+  font-weight: 700;
 }
 .hello {
-    text-align: center;
+  text-align: center;
 }
 svg.delete-icon {
-    margin-left: 6px;
-    transform: translateY(6px);
-    color: var(--metal);
-    transition: color .2s ease-out;
-    cursor: pointer;
+  margin-left: 6px;
+  transform: translateY(6px);
+  color: var(--metal);
+  transition: color 0.2s ease-out;
+  cursor: pointer;
 }
 .delete-icon:hover {
-    color: red;
+  color: red;
 }
 th.transaction-column-tittle.MuiTableCell-head {
-    background-color: var(--metal);
+  background-color: var(--metal);
 }
 footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-    background-color: var(--metal);
-    color: #fff;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  background-color: var(--metal);
+  color: #fff;
 }
 a {
-    color: #8dc647;
-    text-decoration: none;
+  color: #8dc647;
+  text-decoration: none;
 }
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 @media (max-width: 1024px) {
-    .sign-forms-container {
-        flex-direction: column;
-        align-items: center;
-        margin-top: 40px;
-    }
-    .sign-form {
-       width: 88vw; 
-       max-width: 400px;
-    }
-    .sign-form:first-of-type {
-        margin-bottom: 50px;
-    }
-    th.transaction-column-tittle.MuiTableCell-head, .transaction > th.MuiTableCell-body {
-        font-size: 11px;
-        padding: 4px 10px;
-    }
-    .transaction > th.MuiTableCell-body:last-of-type {
-        position: relative;
-        padding: 16px 10px;
-    }
-    svg.delete-icon {
-        display: none;
-    }
-    .add-currency {
-        flex-direction: column;
-        align-items: stretch;
-        margin-bottom: 30px;
-    }
-    .input-container, .autocomplete > div {
-        width: 100%;
-        margin-left: 0;
-    }
+  .sign-forms-container {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+  }
+  .sign-form {
+    width: 88vw;
+    max-width: 400px;
+  }
+  .sign-form:first-of-type {
+    margin-bottom: 50px;
+  }
+  th.transaction-column-tittle.MuiTableCell-head,
+  .transaction > th.MuiTableCell-body {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+  .transaction > th.MuiTableCell-body:last-of-type {
+    position: relative;
+    padding: 16px 10px;
+  }
+  svg.delete-icon {
+    display: none;
+  }
+  .add-currency {
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 30px;
+  }
+  .input-container,
+  .autocomplete > div {
+    width: 100%;
+    margin-left: 0;
+  }
 }

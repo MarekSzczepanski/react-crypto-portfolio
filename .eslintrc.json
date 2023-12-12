@@ -1,0 +1,29 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "airbnb",
+        "prettier"
+    ],
+    "plugins": [
+        "react",
+        "prettier"
+    ],
+    "rules": {
+		"prettier/prettier": [
+			"error",
+			{
+				"bracketSpacing": true,
+				"printWidth": 80,
+				"singleQuote": true,
+				"tabWidth": 2,
+				"useTabs": false,
+				"endOfLine": "lf"
+			}
+		]
+	}
+}
