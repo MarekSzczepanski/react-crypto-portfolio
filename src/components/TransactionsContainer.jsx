@@ -69,7 +69,7 @@ const TransactionsContainer = ({
     if (transactionAdded) setTransactionAdded(false);
 
     fetch(
-      `https://crypto-portfolio.vyost.usermd.net:16027/transactions/fetch?id=${userId}`,
+      `https://crypto-portfolio.vyost.usermd.net:45748/transactions/fetch?id=${userId}`,
       {
         method: 'GET',
         headers: { 'Content-type': 'application/json' },
@@ -88,7 +88,7 @@ const TransactionsContainer = ({
       return manageMessage('error', 'Something went wrong...');
 
     fetch(
-      `https://crypto-portfolio.vyost.usermd.net:16027/transactions/remove?id=${transactionId}`,
+      `https://crypto-portfolio.vyost.usermd.net:45748/transactions/remove?id=${transactionId}`,
       {
         method: 'DELETE',
         headers: { 'Content-type': 'application/json' },

@@ -1,4 +1,4 @@
-import db from '../db';
+import db from '../db.js';
 
 export const add = (req, res) => {
   const { name, ammount, price, userId, currencyId } = req.body;

@@ -64,7 +64,7 @@ const AddTransactionForm = ({ userId, setTransactionAdded, manageMessage }) => {
     )
       return manageMessage('error', 'Ammount and price must be valid numbers.');
 
-    fetch(`https://crypto-portfolio.vyost.usermd.net:16027/transactions/add`, {
+    fetch(`https://crypto-portfolio.vyost.usermd.net:45748/transactions/add`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

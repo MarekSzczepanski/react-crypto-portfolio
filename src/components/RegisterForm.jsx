@@ -15,7 +15,7 @@ const RegisterForm = ({ manageMessage }) => {
     if (password !== confirmPassword)
       return manageMessage('error', "Passwords don't match!");
 
-    fetch(`https://crypto-portfolio.vyost.usermd.net:16027/auth/register`, {
+    fetch(`https://crypto-portfolio.vyost.usermd.net:45748/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, password }),

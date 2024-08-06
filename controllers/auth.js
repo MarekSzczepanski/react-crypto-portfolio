@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import db from '../db';
+import db from '../db.js';
 
 export const register = (req, res) => {
   const { name, email, password } = req.body;
